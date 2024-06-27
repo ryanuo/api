@@ -31,7 +31,7 @@ def get_oil_price(data):
     if isinstance(province, list):
         for i in province:
             if len(province) > 1:
-                time.sleep(0.5)
+                time.sleep(1)
             results.append(fetch_oil_price(i))
 
     return jsonify({'data': results, 'success': True})
