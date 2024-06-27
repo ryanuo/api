@@ -1,26 +1,37 @@
+import os
+import time
 import requests
+from flask import jsonify
 
-from api.module.common import api_request
+app_id = os.getenv('OIL_APP_ID')
+app_secret = os.getenv('OIL_APP_SECRET')
 
 
-def get_oil_price(data):
-    province = data.get('province')
-
-    # 替换成你的 API 调用逻辑
+def fetch_oil_price(province):
     api_url = 'https://www.mxnzp.com/api/oil/search'
-    app_id = 'ngeorpqtkeijibqu'
-    app_secret = 'ZWJlWXFzc21KNjYzVG9iakdBT3cydz09'
 
-    # 构建 API 请求
-    headers = {
-        'Content-Type': 'application/x-www-form-urlencoded'
-    }
-    payload = {
+    params = {
         'province': province,
         'app_id': app_id,
         'app_secret': app_secret
     }
 
-    # 发送 POST 请求
-    response = requests.post(api_url, data=payload, headers=headers)
-    return api_request(response)
+    try:
+        response = requests.get(api_url, params=params)
+        response.raise_for_status()  # 如果请求不成功，会抛出异常
+        return response.json().get('data')
+    except requests.exceptions.RequestException as e:
+        return {'error': 'fetch error data'}
+
+
+def get_oil_price(data):
+    results = []
+
+    province = data.get('province')
+    if isinstance(province, list):
+        for i in province:
+            if len(province) > 1:
+                time.sleep(0.5)
+            results.append(fetch_oil_price(i))
+
+    return jsonify({'data': results, 'success': True})

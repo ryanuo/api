@@ -4,13 +4,12 @@ from module.oil import get_oil_price
 
 app = Flask(__name__)
 
-
 CORS(app, resources={r"/*": {"origins": "*.ryanuo.cc"}})
+
 
 @app.route('/oil-price', methods=['POST'])
 def oil_price():
-    get_oil_price(request.data)
-
+    return get_oil_price(request.json)
 
 
 if __name__ == '__main__':
