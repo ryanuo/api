@@ -1,6 +1,6 @@
 from flask import Flask, request
 from flask_cors import CORS
-from module.oil import get_oil_price
+from .module.oil import get_oil_price
 
 app = Flask(__name__)
 
