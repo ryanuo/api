@@ -3,8 +3,8 @@ import time
 import requests
 from flask import jsonify
 
-app_id = os.getenv('OIL_APP_ID')
-app_secret = os.getenv('OIL_APP_SECRET')
+app_id = os.environ.get('OIL_APP_ID')
+app_secret = os.environ.get('OIL_APP_SECRET')
 
 
 def fetch_oil_price(province):
