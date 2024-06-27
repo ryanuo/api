@@ -10,7 +10,3 @@ CORS(app, resources={r"/*": {"origins": "https://ryanuo.cc"}})
 @app.route('/oil-price', methods=['POST'])
 def oil_price():
     return get_oil_price(request.json)
-
-
-if __name__ == '__main__':
-    app.run(debug=True)
