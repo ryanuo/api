@@ -4,7 +4,7 @@ from module.oil import get_oil_price
 
 app = Flask(__name__)
 
-CORS(app, resources={r"/*": {"origins": "*.ryanuo.cc"}})
+CORS(app, resources={r"/*": {"origins": "https://ryanuo.cc"}})
 
 
 @app.route('/oil-price', methods=['POST'])
