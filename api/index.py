@@ -10,6 +10,8 @@ CORS(app, resources={r"/*": {"origins": "https://ryanuo.cc"}})
 
 app_id = os.environ.get('OIL_APP_ID')
 app_secret = os.environ.get('OIL_APP_SECRET')
+
+
 @app.route('/oil-price', methods=['POST'])
 def oil_price():
     return get_oil_price(request.json)
@@ -17,4 +19,5 @@ def oil_price():
 
 @app.route("/", methods=["GET"])
 def hello():
-    return f"部署成功开始使用吧！{app_id}"
+    get_oil_price({'province': ['河南']})
+    return f"部署成功开始使用吧！{app_id}，{get_oil_price({'province': ['河南']})}"
