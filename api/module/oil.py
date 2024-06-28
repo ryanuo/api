@@ -10,10 +10,16 @@ app_secret = os.environ.get('OIL_APP_SECRET')
 def fetch_oil_price(province):
     api_url = 'https://www.mxnzp.com/api/oil/search'
 
+    params = {
+        'province': province,
+        'app_id': app_id,
+        'app_secret': app_secret
+    }
+
     try:
-        response = requests.get(f'{api_url}?province=${province}&app_id={app_id}&app_secret={app_secret}')
+        response = requests.get(api_url, params=params)
         response.raise_for_status()  # 如果请求不成功，会抛出异常
-        return response.json()
+        return response.json().get('data')
     except requests.exceptions.RequestException as e:
         return {'error': 'fetch error data'}
 
