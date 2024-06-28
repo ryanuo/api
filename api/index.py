@@ -20,4 +20,4 @@ def oil_price():
 @app.route("/", methods=["GET"])
 def hello():
     get_oil_price({'province': ['河南']})
-    return f"部署成功开始使用吧！{app_id}，{get_oil_price({'province': ['河南']}).json}"
+    return f"部署成功开始使用吧！{app_id}"

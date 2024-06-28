@@ -19,7 +19,7 @@ def fetch_oil_price(province):
     try:
         response = requests.get(api_url, params=params)
         response.raise_for_status()  # 如果请求不成功，会抛出异常
-        return response.json().get('data')
+        return response.json()
     except requests.exceptions.RequestException as e:
         return {'error': 'fetch error data'}
 
